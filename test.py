@@ -1,25 +1,14 @@
 
-"""
-Install the Google AI Python SDK
-
-$ pip install google-generativeai
-
-See the getting started guide for more information:
-https://ai.google.dev/gemini-api/docs/get-started/python
-"""
 
 import os
 import google.generativeai as genai
-# from main import text_to_speech
 
 from dotenv import load_dotenv
 load_dotenv()
 
 
-genai.configure(api_key=os.getenv("AIzaSyAXEuac7JdQfKeMqvUsSgTbja4W0FZElas"))
+genai.configure(api_key=os.getenv("Gemini API Key"))
 
-# Create the model
-# See https://ai.google.dev/api/python/google/generativeai/GenerativeModel
 generation_config = {
   "temperature": 0,
   "top_p": 0.95,
@@ -70,12 +59,10 @@ while True:
 
     response = chat_session.send_message(user_input)
 
-    # model_response = response.text
     cleaned_response = response.text.replace("*", "").strip()
 
     print(f'Bot: {cleaned_response}')
     print()
-    # text_to_speech(model_response)
 
     chat_session.history.append({"role": "user", "parts": [user_input]})
     chat_session.history.append({"role": "model", "parts": [cleaned_response]})
